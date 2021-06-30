@@ -1,24 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import AppHeading from './shared/AppHeading';
+import Container from 'react-bootstrap/Container';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import Login from './pages/login/Login';
+import Dashboard from './pages/admin/Dashboard';
+import useToken from './shared/useToken';
 
-function App() {
+function App(props) {
+  const { token, setToken } = useToken();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container className="p-3">
+      <Router>
+        <AppHeading token={token} />
+        <Switch>
+          <Route path="/login">
+            <Login setToken={setToken} />
+          </Route>
+          <Route path="/">
+            <Dashboard title="Dashboard" {...props} />
+          </Route>
+        </Switch>
+      </Router>
+    </Container>
   );
 }
 
