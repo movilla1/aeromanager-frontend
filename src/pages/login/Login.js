@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/esm/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
+import { useHistory } from "react-router-dom";
 
 async function loginUser(credentials) {
   return fetch('http://localhost:8080/authenticate', {
@@ -18,14 +19,22 @@ async function loginUser(credentials) {
 export default function Login({ setToken }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
+  const [message, setMessage] = useState('');
+  const history = useHistory();
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const token = await loginUser({
+
+    const authData = await loginUser({
       username,
       password
     });
-    setToken(token);
+    if (authData?.token) {
+      setToken(authData);
+      history.push("/dashboard");
+    } else {
+      setMessage(authData?.error);
+    }
   }
 
   return (
@@ -51,6 +60,7 @@ export default function Login({ setToken }) {
             </div>
           </Row>
         </form>
+        <div className="alert">{message}</div>
       </Jumbotron>
     </Container>
   )

@@ -1,17 +1,17 @@
-export const setToken = (userToken) => {
-  sessionStorage.setItem('token', JSON.stringify(userToken));
-};
-
-export const getToken = () => {
-  const tokenString = sessionStorage.getItem('token');
-  const userToken = JSON.parse(tokenString);
-  return userToken?.token
-}
-
 export const currentUser = () => {
-  return sessionStorage.getItem('user');
+  const userData = JSON.parse(sessionStorage.getItem('user'));
+  return userData;
 }
 
 export const isLoggedIn = () => (
   sessionStorage.getItem('token') + "x" !== "x"
+)
+
+export const logOut = () => {
+  sessionStorage.removeItem('token');
+  sessionStorage.removeItem('user');
+}
+
+export const setCurrentUser = (userData) => (
+  sessionStorage.setItem('user', JSON.stringify(userData))
 )

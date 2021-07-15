@@ -4,6 +4,9 @@ import Container from 'react-bootstrap/Container';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Dashboard from './pages/admin/Dashboard';
+import Logout from './pages/login/Logout';
+import ProfileManager from './pages/profile/ProfileManager';
+import ProfileChangePass from './pages/profile/ProfileChangePass';
 import useToken from './shared/useToken';
 
 function App(props) {
@@ -17,8 +20,17 @@ function App(props) {
           <Route path="/login">
             <Login setToken={setToken} />
           </Route>
+          <Route path="/profile/changePassword">
+            <ProfileChangePass token={token} />
+          </Route>
+          <Route path="/profile">
+            <ProfileManager token={token} />
+          </Route>
           <Route path="/">
             <Dashboard title="Dashboard" {...props} />
+          </Route>
+          <Route path="/logout">
+            <Logout visible={true} />
           </Route>
         </Switch>
       </Router>
