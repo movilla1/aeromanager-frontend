@@ -1,0 +1,7 @@
+# Ignore files for docker
+/node_modules
+/build
+.git
+*.md
+.gitignore
+ 
