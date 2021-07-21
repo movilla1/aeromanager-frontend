@@ -4,6 +4,8 @@ import Jumbotron from 'react-bootstrap/esm/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import Alert from 'react-bootstrap/Alert';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { currentUser, setCurrentUser } from '../../shared/session';
 import { useHistory } from 'react-router';
 import { ApiCreateOrUpdateCall } from '../../shared/apiCall';
@@ -51,10 +53,16 @@ function ProfileManager(props) {
           <Form.Control type="email" placeholder="e-mail" value={userDetails.email} readOnly />
         </Form.Group>
         <Form.Group controlId="actions">
-          <Button type="submit">Grabar</Button>
+          <Row>
+            <Col>
+              <Button type="button" onClick={changePassword}>Cambiar Clave</Button>
+            </Col>
+            <Col>
+              <Button type="submit">Grabar</Button>
+            </Col>
+          </Row>
         </Form.Group>
       </Form>
-      <Button type="button" onClick={changePassword}>Cambiar Clave</Button>
     </Jumbotron>
   )
 }

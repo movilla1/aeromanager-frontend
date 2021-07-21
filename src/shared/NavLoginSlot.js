@@ -11,7 +11,7 @@ export default function NavLoginSlot() {
     return (
       <NavDropdown title={userName} id="basic-nav-dropdown">
         <NavDropdown.Item href="/profile">Mi cuenta</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+        <NavDropdown.Item href="/flightlogs">Mis Vuelos</NavDropdown.Item>
         <NavDropdown.Divider />
         <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
       </NavDropdown>

@@ -8,6 +8,8 @@ import Logout from './pages/login/Logout';
 import ProfileManager from './pages/profile/ProfileManager';
 import ProfileChangePass from './pages/profile/ProfileChangePass';
 import useToken from './shared/useToken';
+import FlightLogList from './pages/flight_log/FlightLogList';
+import FlightLogDetail from './pages/flight_log/FlightLogDetail';
 
 function App(props) {
   const { token, setToken } = useToken();
@@ -26,11 +28,17 @@ function App(props) {
           <Route path="/profile">
             <ProfileManager token={token} />
           </Route>
-          <Route path="/">
-            <Dashboard title="Dashboard" {...props} />
+          <Route path="/flightlog/:id">
+            <FlightLogDetail token={token} {...props} />
+          </Route>
+          <Route path="/flightlogs">
+            <FlightLogList token={token} />
           </Route>
           <Route path="/logout">
             <Logout visible={true} />
+          </Route>
+          <Route path="/">
+            <Dashboard title="Dashboard" {...props} />
           </Route>
         </Switch>
       </Router>

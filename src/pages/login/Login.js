@@ -33,7 +33,7 @@ export default function Login({ setToken }) {
       setToken(authData);
       history.push("/dashboard");
     } else {
-      setMessage(authData?.error);
+      setMessage(authData?.error?.user_authentication || "Invalid user and password");
     }
   }
 

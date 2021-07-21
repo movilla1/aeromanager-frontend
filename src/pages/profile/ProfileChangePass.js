@@ -6,19 +6,17 @@ import Button from 'react-bootstrap/esm/Button';
 import Alert from 'react-bootstrap/Alert';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { currentUser } from '../../shared/session';
 import { useHistory } from 'react-router';
 import { ApiCreateOrUpdateCall } from '../../shared/apiCall';
 
 function ProfileChangePass(props) {
-  const userData = currentUser();
   const token = props.token;
   const history = useHistory();
   const [message, setMessage] = useState('');
 
   const handleSave = (evt) => {
     evt.preventDefault();
-    console.log(evt.target.newpass);
+
     if (evt.target.newpass.value.length === 0 ||
       evt.target.newpassconfirm.value.length === 0) {
       setMessage("Las claves no pueden ser vacias");
