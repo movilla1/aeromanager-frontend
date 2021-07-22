@@ -6,7 +6,7 @@ import { Nav, Navbar, Container } from 'react-bootstrap';
 function AppHeading(props) {
   return (
     <Fragment>
-      <Navbar bg="dark" variant="dark" fixed="top">
+      <Navbar bg="light" variant="light" fixed="top" className="nav-tabs nav-fill">
         <Container>
           <Navbar.Brand href="/">
             <img
@@ -22,6 +22,7 @@ function AppHeading(props) {
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="me-auto">
               <Nav.Link href="/flightlog/new">Nuevo Vuelo</Nav.Link>
+              <Nav.Link href="/flightlogs">Mis Vuelos</Nav.Link>
               <NavLoginSlot />
             </Nav>
           </Navbar.Collapse>

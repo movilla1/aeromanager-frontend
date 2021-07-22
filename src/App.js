@@ -10,7 +10,6 @@ import ProfileChangePass from './pages/profile/ProfileChangePass';
 import useToken from './shared/useToken';
 import FlightLogList from './pages/flight_log/FlightLogList';
 import FlightLogDetail from './pages/flight_log/FlightLogDetail';
-import "react-datetime/css/react-datetime.css";
 import FlightLogForm from './pages/flight_log/FlightLogForm';
 
 function App(props) {
