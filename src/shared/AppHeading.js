@@ -1,26 +1,31 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import Navbar from 'react-bootstrap/Navbar';
 import NavLoginSlot from './NavLoginSlot';
+import { Nav, Navbar, Container } from 'react-bootstrap';
 
 function AppHeading(props) {
   return (
     <Fragment>
-      <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="/">
-          <img
-            alt=""
-            src="/logo.svg"
-            width="30"
-            height="30"
-            className="d-inline-block align-top"
-          />{' '}
-          AeroManager
-        </Navbar.Brand>
-
-        <Navbar.Collapse className="justify-content-end">
-          <NavLoginSlot />
-        </Navbar.Collapse>
+      <Navbar bg="dark" variant="dark" fixed="top">
+        <Container>
+          <Navbar.Brand href="/">
+            <img
+              alt=""
+              src="/logo.svg"
+              width="30"
+              height="30"
+              className="d-inline-block align-top"
+            />{' '}
+            AeroManager
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
+            <Nav className="me-auto">
+              <Nav.Link href="/flightlog/new">Nuevo Vuelo</Nav.Link>
+              <NavLoginSlot />
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
       </Navbar>
     </Fragment>
   )

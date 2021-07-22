@@ -5,6 +5,7 @@ import useToken from './useToken';
 import { currentUser } from '../shared/session';
 
 export default function NavLoginSlot() {
+  // eslint-disable-next-line no-unused-vars
   const { token, setToken } = useToken();
   const userName = currentUser()?.name;
   if (token) {

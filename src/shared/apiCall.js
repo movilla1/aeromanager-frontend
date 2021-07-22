@@ -8,12 +8,11 @@ import axios from "axios";
  * @returns promise with the execution result
  */
 export const ApiCreateOrUpdateCall = (path, dataObject, token) => (
-  axios.post(BASE_URI + path, {
+  axios.post(BASE_URI + path, dataObject, {
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
-    },
-    data: dataObject
+    }
   })
 )
 

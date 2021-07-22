@@ -11,6 +11,7 @@ import useToken from './shared/useToken';
 import FlightLogList from './pages/flight_log/FlightLogList';
 import FlightLogDetail from './pages/flight_log/FlightLogDetail';
 import "react-datetime/css/react-datetime.css";
+import FlightLogForm from './pages/flight_log/FlightLogForm';
 
 function App(props) {
   const { token, setToken } = useToken();
@@ -28,6 +29,9 @@ function App(props) {
           </Route>
           <Route path="/profile">
             <ProfileManager token={token} />
+          </Route>
+          <Route path="/flightlog/new">
+            <FlightLogForm token={token} />
           </Route>
           <Route path="/flightlog/:id">
             <FlightLogDetail token={token} {...props} />
