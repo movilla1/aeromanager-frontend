@@ -14,6 +14,7 @@ function FlightLogForm(props) {
   const [Airplanes, setAirplanes] = useState([]);
   const [StartTime, setStartTime] = useState(new Date());
   const [EndTime, setEndTime] = useState(new Date());
+  const [Instructors, setInstructors] = useState([])
   const history = useHistory();
 
   const handleSubmit = (evt) => {
@@ -22,6 +23,7 @@ function FlightLogForm(props) {
       airplane_id: evt.target.airplane.value,
       flight_start: StartTime,
       flight_end: EndTime,
+      flight_type: evt.target.flightType.value
     }
     ApiCreateOrUpdateCall("/flight_logs", formData, props.token)
       .then((response) => {
@@ -40,7 +42,10 @@ function FlightLogForm(props) {
     ApiListCall("/airplanes", props.token).then(
       (response) => setAirplanes(response.data.data)
     ).catch((err) => setMessage(err.message));
-  }, [props.token, setMessage, setAirplanes]);
+    ApiListCall("/users/instructors", props.token).then(
+      (response) => setInstructors(response.data.data)
+    ).catch((err) => setMessage(err.message))
+  }, [props.token, setMessage, setAirplanes, setInstructors]);
 
   return (
     <Jumbotron>
@@ -96,6 +101,50 @@ function FlightLogForm(props) {
               onChange={setEndTime}
               id="endTime"
             />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Label>Motivo del vuelo</Form.Label>
+          </Col>
+          <Col>
+            <Form.Control
+              as="select"
+              id="flightType"
+            >
+              <option value="TAXI">Taxi</option>
+              <option value="LA">Linea Aerea</option>
+              <option value="TA">Trabajo Aereo</option>
+              <option value="VP">Vuelo Privado</option>
+              <option value="ENT">Entrenamiento</option>
+              <option value="INST">Instrucci&oacute;n</option>
+              <option value="I">Instructor</option>
+              <option value="PA">Prueba de Aviones</option>
+              <option value="IP">Inspector</option>
+              <option value="ADAP">Adaptaci&oacute;n</option>
+              <option value="READ">Readapaci&oacute;n</option>
+              <option value="RP">Remolque de Planeadores</option>
+              <option value="SAN">Sanitario</option>
+              <option value="ACR">Acrobacia</option>
+              <option value="EXA">Examen</option>
+              <option value="FOT">Fotograf&iacute;a</option>
+              <option value="FOR">Formaci&oacute;n</option>
+              <option value="VO">Vuelo Oficial</option>
+              <option value="LP">Lanzamiento de Paracaidistas</option>
+            </Form.Control>
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Label>Instructor</Form.Label>
+          </Col>
+          <Col>
+            <Form.Control
+              as="select"
+              id="flightInstructor"
+            >
+              {Instructors && Instructors.length && Instructors.map((inst) => (<option value={inst.id}>{inst.name}</option>))}
+            </Form.Control>
           </Col>
         </Row>
         <Row style={{ textAlign: "center", marginTop: "10pt" }}>
