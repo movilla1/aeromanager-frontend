@@ -1,12 +1,14 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import NavLoginSlot from './NavLoginSlot';
-import { Nav, Navbar, Container } from 'react-bootstrap';
+import { currentUser } from './session';
+import { Container, Nav, Navbar } from 'react-bootstrap';
 
 function AppHeading(props) {
+  const userName = currentUser()?.name;
   return (
     <Fragment>
-      <Navbar bg="light" variant="light" fixed="top" className="nav-tabs nav-fill">
+      <Navbar bg="light" variant="light" expand="md">
         <Container>
           <Navbar.Brand href="/">
             <img
@@ -21,8 +23,10 @@ function AppHeading(props) {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="me-auto">
-              <Nav.Link href="/flightlog/new">Nuevo Vuelo</Nav.Link>
-              <Nav.Link href="/flightlogs">Mis Vuelos</Nav.Link>
+              {userName && <Fragment>
+                <Nav.Link href="/flightlog/new">Nuevo Vuelo</Nav.Link>
+                <Nav.Link href="/flightlogs">Mis Vuelos</Nav.Link>
+              </Fragment>}
               <NavLoginSlot />
             </Nav>
           </Navbar.Collapse>

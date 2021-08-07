@@ -14,6 +14,9 @@ function FlightDataRow(props) {
       <td>{row.flightStart}</td>
       <td>{row.flightEnd}</td>
       <td>{row.normalizedDuration}</td>
+      <td>{row.flightType}</td>
+      <td>{row.originAirport}</td>
+      <td>{row.destinationAirport}</td>
       <td><Link to={`/flightlog/${props.row.id}`} title="Ver detalle"><FontAwesomeIcon icon={faEye} /></Link></td>
     </tr>
   )

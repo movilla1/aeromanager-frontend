@@ -30,11 +30,14 @@ function FlightLogList(props) {
           <thead>
             <tr>
               <th>#</th>
-              <th>Plane</th>
-              <th>Start</th>
-              <th>End</th>
-              <th>Normalized Duration</th>
-              <th>Actions</th>
+              <th>Avion</th>
+              <th>Inicio</th>
+              <th>Fin</th>
+              <th>Duraci&oacute;n</th>
+              <th>Tipo de Vuelo</th>
+              <th>Origen</th>
+              <th>Destino</th>
+              <th>Aciones</th>
             </tr>
           </thead>
           <tbody>

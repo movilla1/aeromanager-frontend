@@ -2,12 +2,18 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import PropTypes from 'prop-types'
+import { useHistory } from 'react-router-dom'
 
 const Logout = ({ visible }) => {
   const [show, setShow] = useState(visible);
-
+  const history = useHistory();
   const handleCancel = () => setShow(false);
-  const handleLogout = () => setShow(false);
+  const handleLogout = () => {
+    setShow(false);
+    sessionStorage.clear();
+    history.push("/");
+    return true;
+  }
 
   return (
     <Modal
