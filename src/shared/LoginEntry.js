@@ -1,10 +1,10 @@
 import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import { Nav } from 'react-bootstrap';
 
 export default function LoginEntry() {
   return (
     <Fragment>
-      <Link to="/login">Login</Link>
+      <Nav.Link href="/login">Login</Nav.Link>
     </Fragment>
   )
 }

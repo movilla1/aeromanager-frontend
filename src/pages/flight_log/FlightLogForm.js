@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import Form from 'react-bootstrap/Form'
@@ -6,24 +6,42 @@ import { Alert, Jumbotron, Col, Row, Button } from 'react-bootstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSave, faBackward } from '@fortawesome/free-solid-svg-icons'
 import DateTimePicker from 'react-datetime-picker'
+import { FlightLog } from '../../models/FlightLog'
 import { currentUser } from '../../shared/session'
-import { ApiCreateOrUpdateCall, ApiListCall } from '../../shared/apiCall'
+import { ApiCreateOrUpdateCall } from '../../shared/apiCall'
+import MappedSelect from '../../shared/formElements/MappedSelect'
+import TextField from '../../shared/formElements/TextField'
 
 function FlightLogForm(props) {
   const [Message, setMessage] = useState("");
-  const [Airplanes, setAirplanes] = useState([]);
   const [StartTime, setStartTime] = useState(new Date());
   const [EndTime, setEndTime] = useState(new Date());
-  const [Instructors, setInstructors] = useState([])
+  const initialFlightLog = new FlightLog(props.flightLogData)
+  const [FlightLogData, setFlightLogData] = useState(initialFlightLog);
   const history = useHistory();
+  const {
+    airplaneID,
+    flightType,
+    odoStart,
+    odoEnd,
+    instructor,
+    destinationAirport,
+    originAirport
+  } = FlightLogData;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
+    console.log(FlightLogData);
     const formData = {
-      airplane_id: evt.target.airplane.value,
+      airplane_id: airplaneID,
       flight_start: StartTime,
       flight_end: EndTime,
-      flight_type: evt.target.flightType.value
+      flight_type: flightType,
+      odo_start: odoStart,
+      odo_end: odoEnd,
+      instructor_id: instructor,
+      destination_airport: destinationAirport,
+      origin_airport: originAirport
     }
     ApiCreateOrUpdateCall("/flight_logs", formData, props.token)
       .then((response) => {
@@ -34,18 +52,17 @@ function FlightLogForm(props) {
         }
       })
   }
+
   const handleBack = (evt) => {
     history.goBack();
   }
 
-  useEffect(() => {
-    ApiListCall("/airplanes", props.token).then(
-      (response) => setAirplanes(response.data.data)
-    ).catch((err) => setMessage(err.message));
-    ApiListCall("/users/instructors", props.token).then(
-      (response) => setInstructors(response.data.data)
-    ).catch((err) => setMessage(err.message))
-  }, [props.token, setMessage, setAirplanes, setInstructors]);
+  const handleChangeData = (evt, field) => {
+    setFlightLogData({
+      ...FlightLogData,
+      [field]: evt.target.value
+    });
+  }
 
   return (
     <Jumbotron>
@@ -54,53 +71,16 @@ function FlightLogForm(props) {
       {Message && <Alert key="alrmts" variant="warning">{Message}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col>
+          <Col md="3">
             <Form.Label>Avion</Form.Label>
           </Col>
-          <Col>
-            <Form.Control
-              as="select"
-              id="airplane"
-              custom
-            >
-              {
-                Airplanes && Airplanes.length > 0 && Airplanes.map(
-                  (airplane) => (
-                    <option value={airplane.id} key={airplane.id}>{airplane.attributes.identifier}</option>
-                  )
-                )
-              }
-            </Form.Control>
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Label>Inicio</Form.Label>
-          </Col>
-          <Col>
-            <DateTimePicker
-              format="dd-MM-y HH:mm"
-              maxDetail="minute"
-              minDetail="decade"
-              value={StartTime}
-              onChange={setStartTime}
-              id="startTime"
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <Form.Label>Final</Form.Label>
-          </Col>
-          <Col>
-            <DateTimePicker
-              format="dd-MM-y HH:mm"
-              maxDetail="minute"
-              minDetail="decade"
-              value={EndTime}
-              onChange={setEndTime}
-              id="endTime"
-            />
+          <Col md="9">
+            <MappedSelect
+              token={props.token}
+              onChange={(e) => handleChangeData(e, "airplaneID")}
+              value={airplaneID}
+              apiEndpoint="/airplanes"
+            ></MappedSelect>
           </Col>
         </Row>
         <Row>
@@ -111,6 +91,7 @@ function FlightLogForm(props) {
             <Form.Control
               as="select"
               id="flightType"
+              onChange={(e) => handleChangeData(e, "flightType")}
             >
               <option value="TAXI">Taxi</option>
               <option value="LA">Linea Aerea</option>
@@ -133,19 +114,77 @@ function FlightLogForm(props) {
               <option value="LP">Lanzamiento de Paracaidistas</option>
             </Form.Control>
           </Col>
-        </Row>
-        <Row>
           <Col>
             <Form.Label>Instructor</Form.Label>
           </Col>
           <Col>
-            <Form.Control
-              as="select"
-              id="flightInstructor"
-            >
-              {Instructors && Instructors.length && Instructors.map((inst) => (<option value={inst.id}>{inst.name}</option>))}
-            </Form.Control>
+            <MappedSelect
+              id="instructor"
+              token={props.token}
+              value={instructor}
+              onChange={(e) => handleChangeData(e, "instructor")}
+              apiEndpoint="/users/instructors"
+              disabled={flightType !== "INST"}
+            ></MappedSelect>
           </Col>
+        </Row>
+        <Row>
+          <Col>
+            <Form.Label>Inicio</Form.Label>
+          </Col>
+          <Col>
+            <DateTimePicker
+              format="dd-MM-y HH:mm"
+              maxDetail="minute"
+              minDetail="decade"
+              value={StartTime}
+              onChange={setStartTime}
+              id="startTime"
+            />
+          </Col>
+          <Col>
+            <Form.Label>Final</Form.Label>
+          </Col>
+          <Col>
+            <DateTimePicker
+              format="dd-MM-y HH:mm"
+              maxDetail="minute"
+              minDetail="decade"
+              value={EndTime}
+              onChange={setEndTime}
+              id="endTime"
+            />
+          </Col>
+        </Row>
+        <Row>
+          <TextField
+            label="Odometro Inicial"
+            placeholder="0"
+            type="number"
+            value={odoStart}
+            onChange={(e) => handleChangeData(e, "odoStart")}
+          ></TextField>
+          <TextField
+            label="Odometro Final"
+            placeholder="0"
+            type="number"
+            value={odoEnd}
+            onChange={(e) => handleChangeData(e, "odoEnd")}
+          ></TextField>
+        </Row>
+        <Row>
+          <TextField
+            label="Aeropuerto Origen"
+            placeholder="CED"
+            value={originAirport}
+            onChange={(e) => handleChangeData(e, "originAirport")}
+          ></TextField>
+          <TextField
+            label="Aeropuerto Destino"
+            placeholder="EZE"
+            value={destinationAirport}
+            onChange={(e) => handleChangeData(e, "destinationAirport")}
+          ></TextField>
         </Row>
         <Row style={{ textAlign: "center", marginTop: "10pt" }}>
           <Col>
@@ -161,8 +200,13 @@ function FlightLogForm(props) {
 }
 
 FlightLogForm.propTypes = {
-  token: PropTypes.string
+  token: PropTypes.string.isRequired,
+  flightLogData: PropTypes.object
 }
+
+FlightLogForm.defaultProps = {
+  flightLogData: {}
+};
 
 export default FlightLogForm
 

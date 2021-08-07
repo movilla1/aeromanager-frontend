@@ -50,6 +50,32 @@ function FlightLogDetail(props) {
             <th>Duracion normalizada</th>
             <td>{Details.normalizedDuration}</td>
           </tr>
+          <tr>
+            <th>Tipo de vuelo</th>
+            <td>{Details.flightType}</td>
+          </tr>
+          {Details.instructor &&
+            <tr>
+              <th>Instructor</th>
+              <td>{Details.instructor}</td>
+            </tr>
+          }
+          <tr>
+            <th>Odometro Inicial</th>
+            <td>{Details.odoStart}</td>
+          </tr>
+          <tr>
+            <th>Odometro Final</th>
+            <td>{Details.odoEnd}</td>
+          </tr>
+          <tr>
+            <th>Aeropuerto Origen</th>
+            <td>{Details.originAirport}</td>
+          </tr>
+          <tr>
+            <th>Aeropuerto Destino</th>
+            <td>{Details.destinationAirport}</td>
+          </tr>
         </tbody>
       </Table>
       <Button type="button" onClick={handleBack}><FontAwesomeIcon icon={faBackward} /> Back</Button>
