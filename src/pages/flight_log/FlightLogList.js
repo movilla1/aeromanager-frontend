@@ -17,15 +17,15 @@ function FlightLogList(props) {
         setLoading(false);
       }).catch((err) => {
         setLoading(false);
-        setFlightData([{ id: 0, airplane: "No Data", start: 0, end: 0, duration: 0 }])
+        setFlightData([])
       })
   }, [setLoading, props.token])
 
   return (
     < Jumbotron >
       <h1>Mis Vuelos</h1>
-      { !loading && (!flightData || flightData.length === 0) && <h3 style={{ textAlign: "center" }}>No hay registros</h3>}
-      { !loading && flightData?.length > 0 &&
+      { !loading && (!flightData || flightData.length < 1) && <h3 style={{ textAlign: "center" }}>No hay registros</h3>}
+      { !loading && flightData?.length >= 1 &&
         <Table striped bordered hover>
           <thead>
             <tr>

@@ -6,6 +6,9 @@ import PropTypes from 'prop-types'
 
 function FlightDataRow(props) {
   const row = props.row.attributes;
+  if (typeof(row) == 'undefined') {
+     return false;
+  }
   console.log(props.row.attributes);
   return (
     <tr>
