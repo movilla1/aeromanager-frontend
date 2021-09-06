@@ -1,20 +1,73 @@
 .App {
   text-align: center;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+body {
+  background-image: url(http://localhost:3000/images/background-flight.jpg);
+  background-position: 0 0;
+  background-repeat:  no-repeat;
+  background-size: cover;
+  color: rgb(230, 230, 150);
+  text-shadow: 2px 2px 2px black;
 }
-
-.App-link {
-  color: #61dafb;
-}
-
 @import 'bootstrap/dist/css/bootstrap.min.css';
+
+.bg-darkaero {
+  background-color: rgba(20,20,20,0.4);
+  color: rgb(230, 230, 150);
+  box-shadow: darkgray;
+}
+.navbar-darkaero {
+  border-radius: 5pt;
+}
+.navbar-darkaero a {
+  text-decoration: none;
+  color: rgb(250, 250, 199);
+}
+
+.jumbotron {
+  background: transparent;
+}
+
+.boxed {
+  margin-top: 25pt;
+  background-color: rgba(10,10,10,0.3);
+  border-radius: 10pt;
+}
+
+td, th {
+  color: rgb(230, 230, 150);
+}
+
+a {
+  color: rgb(230, 230, 150);
+}
+
+h1 {
+  color: rgb(250, 250, 116);
+  text-shadow: 2px 2px 3px black;
+}
+.navbar-nav .dropdown-menu {
+  background-color: rgba(20,20,20,0.4);
+  top: 35pt;
+}
+
+.react-datetime-picker, .react-datetime-picker *, .react-datetime-picker *:before, .react-datetime-picker *:after {
+  background-color: white;
+  color: black;
+  text-shadow: none;
+  border-radius: 3pt;
+  padding: 2pt;
+  border: none;
+}
+
+div.react-datetime-picker {
+  width: 100%;
+}
+
+.collapsed .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28250, 250, 210, 210%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28180, 180, 140, 210%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}

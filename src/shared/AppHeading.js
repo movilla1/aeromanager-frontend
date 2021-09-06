@@ -8,12 +8,12 @@ function AppHeading(props) {
   const userName = currentUser()?.name;
   return (
     <Fragment>
-      <Navbar bg="light" variant="light" expand="md">
+      <Navbar bg="darkaero" variant="darkaero" expand="md">
         <Container>
           <Navbar.Brand href="/">
             <img
               alt=""
-              src="/logo.svg"
+              src="images/logo.svg"
               width="30"
               height="30"
               className="d-inline-block align-top"

@@ -65,16 +65,16 @@ function FlightLogForm(props) {
   }
 
   return (
-    <Jumbotron>
+    <Jumbotron className="boxed">
       <h1>Nuevo Vuelo</h1>
       <h3>Piloto: {currentUser().name}</h3>
       {Message && <Alert key="alrmts" variant="warning">{Message}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Row>
-          <Col md="3">
+          <Col md="2">
             <Form.Label>Avion</Form.Label>
           </Col>
-          <Col md="9">
+          <Col md="10">
             <MappedSelect
               token={props.token}
               onChange={(e) => handleChangeData(e, "airplaneID")}
@@ -84,10 +84,10 @@ function FlightLogForm(props) {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col md="2">
             <Form.Label>Motivo del vuelo</Form.Label>
           </Col>
-          <Col>
+          <Col md="4">
             <Form.Control
               as="select"
               id="flightType"
@@ -114,10 +114,10 @@ function FlightLogForm(props) {
               <option value="LP">Lanzamiento de Paracaidistas</option>
             </Form.Control>
           </Col>
-          <Col>
+          <Col md="2">
             <Form.Label>Instructor</Form.Label>
           </Col>
-          <Col>
+          <Col md="4">
             <MappedSelect
               id="instructor"
               token={props.token}
@@ -129,10 +129,10 @@ function FlightLogForm(props) {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col md="2">
             <Form.Label>Inicio</Form.Label>
           </Col>
-          <Col>
+          <Col md="4">
             <DateTimePicker
               format="dd-MM-y HH:mm"
               maxDetail="minute"
@@ -142,10 +142,10 @@ function FlightLogForm(props) {
               id="startTime"
             />
           </Col>
-          <Col>
+          <Col md="2">
             <Form.Label>Final</Form.Label>
           </Col>
-          <Col>
+          <Col md="4">
             <DateTimePicker
               format="dd-MM-y HH:mm"
               maxDetail="minute"
@@ -174,13 +174,13 @@ function FlightLogForm(props) {
         </Row>
         <Row>
           <TextField
-            label="Aeropuerto Origen"
+            label="Aero. Origen"
             placeholder="CED"
             value={originAirport}
             onChange={(e) => handleChangeData(e, "originAirport")}
           ></TextField>
           <TextField
-            label="Aeropuerto Destino"
+            label="Aero. Destino"
             placeholder="EZE"
             value={destinationAirport}
             onChange={(e) => handleChangeData(e, "destinationAirport")}

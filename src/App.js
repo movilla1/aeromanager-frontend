@@ -16,7 +16,7 @@ function App(props) {
   const { token, setToken } = useToken();
 
   return (
-    <Container className="p-3">
+    <Container className="p-1">
       <Router>
         <AppHeading token={token} />
         <Switch>

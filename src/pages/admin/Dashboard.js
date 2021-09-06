@@ -5,12 +5,11 @@ import { Image, Jumbotron } from 'react-bootstrap'
 const Dashboard = (props) => {
   return (
     <Fragment>
-      <h2>Aeromanager v0.5</h2>
-      <Jumbotron>
+      <Jumbotron className="text-center dashboard">
         <h5>Sistema de registro de datos para aeroclubes.</h5>
         <div className="text-center">
           <Image
-            src="logo.png"
+            src="images/logo.png"
             title="Aeromanager"
             alt="Logo de la aplicaci&oacute;n"
             width="90%"

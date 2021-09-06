@@ -22,7 +22,7 @@ function FlightLogList(props) {
   }, [setLoading, props.token])
 
   return (
-    < Jumbotron >
+    <Jumbotron className="boxed">
       <h1>Mis Vuelos</h1>
       { !loading && (!flightData || flightData.length < 1) && <h3 style={{ textAlign: "center" }}>No hay registros</h3>}
       { !loading && flightData?.length >= 1 &&

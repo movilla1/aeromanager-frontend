@@ -14,6 +14,7 @@ async function loginUser(credentials) {
     body: JSON.stringify(credentials)
   })
     .then(data => data.json())
+    .catch(err => JSON.parse(`{"error": {"user_authentication": "Failed to login: (${err})"}}`))
 }
 
 export default function Login({ setToken }) {
@@ -39,29 +40,27 @@ export default function Login({ setToken }) {
 
   return (
     <Container>
-      <Jumbotron className='col-md-4 offset-md-4'>
-        <h3>Please Login</h3>
-        <form onSubmit={handleSubmit}>
-          <Row>
-            <label>
-              <p>Username</p>
-              <input type="text" onChange={e => setUserName(e.target.value)} />
-            </label>
-          </Row>
-          <Row>
-            <label>
-              <p>Password</p>
-              <input type="password" onChange={e => setPassword(e.target.value)} />
-            </label>
-          </Row>
-          <Row className="">
-            <div className="col-md-2 offset-md-2">
-              <button type="submit">Login</button>
-            </div>
-          </Row>
-        </form>
-        <div className="alert">{message}</div>
-      </Jumbotron>
+      <Row>
+        <Jumbotron className='text-center col-md-4 offset-md-7 boxed'>
+          <h3>Ingreso al sistema</h3>
+          <div style={{marginLeft: "auto", textAlign: "center"}}>
+            <form onSubmit={handleSubmit}>
+                <label>
+                  <p>Usuario</p>
+                  <input type="text" onChange={e => setUserName(e.target.value)} />
+                </label>
+                <label>
+                  <p>Contrase&ntilde;a</p>
+                  <input type="password" onChange={e => setPassword(e.target.value)} />
+                </label>
+                <div className="p-3">
+                  <button type="submit">Login</button>
+                </div>
+            </form>
+          </div>
+          {message?.length > 0 && <div className="alert">{message}</div>}
+        </Jumbotron>
+      </Row>
     </Container>
   )
 }

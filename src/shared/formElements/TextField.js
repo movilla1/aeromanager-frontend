@@ -10,10 +10,10 @@ function TextField(props) {
     .join('-');
   return (
     <Fragment>
-      <Col>
+      <Col md="2">
         <Form.Label htmlFor={id}>{props.label}</Form.Label>
       </Col>
-      <Col>
+      <Col md="4">
         <Form.Control
           type={props.type}
           name={id}
