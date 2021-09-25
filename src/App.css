@@ -2,7 +2,7 @@
   text-align: center;
 }
 body {
-  background-image: url(http://localhost:3000/images/background-flight.jpg);
+  background-image: url(http://localhost:3001/images/background-flight.jpg);
   background-position: 0 0;
   background-repeat:  no-repeat;
   background-size: cover;

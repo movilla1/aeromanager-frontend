@@ -4,9 +4,10 @@ import Container from 'react-bootstrap/esm/Container';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Row from 'react-bootstrap/Row';
 import { useHistory } from "react-router-dom";
+import { BASE_URI } from '../../shared/URI';
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:8080/authenticate', {
+  return fetch(BASE_URI + '/authenticate', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
