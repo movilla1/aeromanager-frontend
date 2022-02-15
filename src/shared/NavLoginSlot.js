@@ -8,9 +8,9 @@ export default function NavLoginSlot() {
   if (userName) {
     return (
       <NavDropdown title={userName} id="basic-nav-dropdown">
-        <NavDropdown.Item href="/profile">Mi cuenta</NavDropdown.Item>
+        <NavDropdown.Item href="#/profile">Mi cuenta</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
+        <NavDropdown.Item href="#/logout">Logout</NavDropdown.Item>
       </NavDropdown>
     )
   } else {

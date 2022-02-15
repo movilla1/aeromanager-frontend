@@ -1,7 +1,7 @@
 import './App.css';
 import AppHeading from './shared/AppHeading';
 import Container from 'react-bootstrap/Container';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { HashRouter, Switch, Route } from 'react-router-dom';
 import Login from './pages/login/Login';
 import Dashboard from './pages/admin/Dashboard';
 import Logout from './pages/login/Logout';
@@ -17,7 +17,7 @@ function App(props) {
 
   return (
     <Container className="p-1">
-      <Router>
+      <HashRouter>
         <AppHeading token={token} />
         <Switch>
           <Route path="/login">
@@ -45,7 +45,7 @@ function App(props) {
             <Dashboard title="Dashboard" {...props} />
           </Route>
         </Switch>
-      </Router>
+      </HashRouter>
     </Container>
   );
 }
