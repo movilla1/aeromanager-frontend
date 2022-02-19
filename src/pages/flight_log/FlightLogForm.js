@@ -11,6 +11,7 @@ import { currentUser } from '../../shared/session'
 import { ApiCreateOrUpdateCall } from '../../shared/apiCall'
 import MappedSelect from '../../shared/formElements/MappedSelect'
 import TextField from '../../shared/formElements/TextField'
+import { getMadhelAirport } from '../../shared/madhel'
 
 function FlightLogForm(props) {
   const [Message, setMessage] = useState("");
@@ -55,6 +56,13 @@ function FlightLogForm(props) {
 
   const handleBack = (evt) => {
     history.goBack();
+  }
+
+  const madhelFetch = (evt, destinationID) => {
+    if(evt.target.value.length < 3) {
+      return "";
+    }
+    getMadhelAirport(evt.target.value, destinationID);
   }
 
   const handleChangeData = (evt, field) => {
@@ -177,14 +185,24 @@ function FlightLogForm(props) {
             label="Aero. Origen"
             placeholder="CED"
             value={originAirport}
-            onChange={(e) => handleChangeData(e, "originAirport")}
+            onChange={(e) => {
+              handleChangeData(e, "originAirport");
+              madhelFetch(e, "originAirport");
+            }}
           ></TextField>
+          <span class="validation" id="originAirport"></span>
+        </Row>
+        <Row>
           <TextField
             label="Aero. Destino"
             placeholder="EZE"
             value={destinationAirport}
-            onChange={(e) => handleChangeData(e, "destinationAirport")}
+            onChange={(e) => {
+              handleChangeData(e, "destinationAirport")
+              madhelFetch(e, "destinationAirport");
+            }}
           ></TextField>
+          <span class="validation" id="destinationAirport"></span>
         </Row>
         <Row style={{ textAlign: "center", marginTop: "10pt" }}>
           <Col>
