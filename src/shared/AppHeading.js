@@ -10,7 +10,7 @@ function AppHeading(props) {
     <Fragment>
       <Navbar bg="darkaero" variant="darkaero" expand="md">
         <Container>
-          <Navbar.Brand href="/">
+          <Navbar.Brand href="#/">
             <img
               alt=""
               src="images/logo.svg"
@@ -24,8 +24,8 @@ function AppHeading(props) {
           <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
             <Nav className="me-auto">
               {userName && <Fragment>
-                <Nav.Link href="/flightlog/new">Nuevo Vuelo</Nav.Link>
-                <Nav.Link href="/flightlogs">Mis Vuelos</Nav.Link>
+                <Nav.Link href="#/flightlog/new">Nuevo Vuelo</Nav.Link>
+                <Nav.Link href="#/flightlogs">Mis Vuelos</Nav.Link>
               </Fragment>}
               <NavLoginSlot />
             </Nav>

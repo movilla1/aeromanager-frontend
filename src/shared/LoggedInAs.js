@@ -10,7 +10,7 @@ export default function LoggedInAs() {
     <Fragment>
       {isLoggedIn &&
         <Navbar.Text>
-          Signed in as: <Link to="/logout">{user?.name}</Link>
+          Signed in as: <Link to="#/logout">{user?.name}</Link>
         </Navbar.Text>
       }
     </Fragment>
