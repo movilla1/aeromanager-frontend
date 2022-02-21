@@ -220,9 +220,10 @@ function FlightLogForm(props) {
           <span class="validation" id="destinationAirport"></span>
         </Row>
         <Row>
-          <div class="flight-hours">
-            {EndTime - StartTime}
-          </div>
+          <Col md="2"><Form.Label>Flight Duration</Form.Label></Col>
+          <Col md="4">
+            {Math.round((EndTime - StartTime) / 1000 / 60 / 60)}
+          </Col>
         </Row>
         <Row style={{ textAlign: "center", marginTop: "10pt" }}>
           <Col>
