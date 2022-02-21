@@ -27,7 +27,8 @@ function FlightLogForm(props) {
     odoEnd,
     instructor,
     destinationAirport,
-    originAirport
+    originAirport,
+    passengerCount
   } = FlightLogData;
 
   const handleSubmit = (evt) => {
@@ -42,7 +43,8 @@ function FlightLogForm(props) {
       odo_end: odoEnd,
       instructor_id: instructor,
       destination_airport: destinationAirport,
-      origin_airport: originAirport
+      origin_airport: originAirport,
+      passenger_count: passengerCount
     }
     ApiCreateOrUpdateCall("/flight_logs", formData, props.token)
       .then((response) => {
@@ -62,7 +64,8 @@ function FlightLogForm(props) {
     if(evt.target.value.length < 3) {
       return "";
     }
-    getMadhelAirport(evt.target.value, destinationID);
+    const capsedAirport = evt.target.value.toUpperCase()
+    getMadhelAirport(capsedAirport, destinationID);
   }
 
   const handleChangeData = (evt, field) => {
@@ -132,14 +135,22 @@ function FlightLogForm(props) {
               value={instructor}
               onChange={(e) => handleChangeData(e, "instructor")}
               apiEndpoint="/users/instructors"
-              disabled={flightType !== "INST"}
+              disabled={flightType !== "INST" || flightType !== "ADAP"}
             ></MappedSelect>
           </Col>
         </Row>
         <Row>
-          <Col md="2">
-            <Form.Label>Inicio</Form.Label>
+          <Col>
+            <TextField
+              label="Nro. Pasajeros"
+              placeholder="1"
+              type="number"
+              value={passengerCount}
+              onChange={(e) => handleChangeData(e, "passengerCount")}
+            ></TextField>
           </Col>
+        </Row>
+        <Row>
           <Col md="4">
             <DateTimePicker
               format="dd-MM-y HH:mm"
@@ -203,6 +214,11 @@ function FlightLogForm(props) {
             }}
           ></TextField>
           <span class="validation" id="destinationAirport"></span>
+        </Row>
+        <Row>
+          <div class="flight-hours">
+            {EndTime - StartTime}
+          </div>
         </Row>
         <Row style={{ textAlign: "center", marginTop: "10pt" }}>
           <Col>
