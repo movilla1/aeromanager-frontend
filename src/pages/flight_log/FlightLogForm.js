@@ -68,6 +68,9 @@ function FlightLogForm(props) {
     getMadhelAirport(capsedAirport, destinationID);
   }
 
+  const onlyCertainFlightTypes = () =>
+    (flightType !== "INST" || flightType !== "ADAP");
+
   const handleChangeData = (evt, field) => {
     setFlightLogData({
       ...FlightLogData,
@@ -81,6 +84,15 @@ function FlightLogForm(props) {
       <h3>Piloto: {currentUser().name}</h3>
       {Message && <Alert key="alrmts" variant="warning">{Message}</Alert>}
       <Form onSubmit={handleSubmit}>
+        <Row>
+          <TextField
+            label="Nro. Pasajeros"
+            placeholder="1"
+            type="number"
+            value={passengerCount}
+            onChange={(e) => handleChangeData(e, "passengerCount")}
+          ></TextField>
+        </Row>
         <Row>
           <Col md="2">
             <Form.Label>Avion</Form.Label>
@@ -135,22 +147,14 @@ function FlightLogForm(props) {
               value={instructor}
               onChange={(e) => handleChangeData(e, "instructor")}
               apiEndpoint="/users/instructors"
-              disabled={flightType !== "INST" || flightType !== "ADAP"}
+              disabled={onlyCertainFlightTypes()}
             ></MappedSelect>
           </Col>
         </Row>
         <Row>
-          <Col>
-            <TextField
-              label="Nro. Pasajeros"
-              placeholder="1"
-              type="number"
-              value={passengerCount}
-              onChange={(e) => handleChangeData(e, "passengerCount")}
-            ></TextField>
+          <Col md="2">
+            <Form.Label>Inicio de vuelo</Form.Label>
           </Col>
-        </Row>
-        <Row>
           <Col md="4">
             <DateTimePicker
               format="dd-MM-y HH:mm"
