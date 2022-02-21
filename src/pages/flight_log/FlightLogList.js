@@ -8,6 +8,7 @@ import LoadingSpinner from '../../shared/LoadingSpinner'
 
 function FlightLogList(props) {
   const [flightData, setFlightData] = useState([]);
+  const [totalHours, setTotalHours] = useState(0.0);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     setLoading(true);
@@ -19,7 +20,15 @@ function FlightLogList(props) {
         setLoading(false);
         setFlightData([])
       })
-  }, [setLoading, props.token])
+    ApiListCall("/flight_logs/totalize", props.token)
+      .then((response)=> {
+        setTotalHours(response.data.total);
+      })
+      .catch( (err) => {
+        setLoading(false);
+        setTotalHours(0);
+      })
+  }, [setLoading, setTotalHours, props.token])
 
   return (
     <Jumbotron className="boxed">
@@ -42,6 +51,10 @@ function FlightLogList(props) {
           </thead>
           <tbody>
             {flightData.map((row) => <FlightDataRow row={row}></FlightDataRow>)}
+            <tr>
+              <th colSpan={4}>Total</th>
+              <td colSpan={4}>{totalHours}</td>
+            </tr>
           </tbody>
         </Table>
       }
