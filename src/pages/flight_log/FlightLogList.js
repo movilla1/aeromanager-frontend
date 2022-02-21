@@ -53,7 +53,11 @@ function FlightLogList(props) {
             {flightData.map((row) => <FlightDataRow row={row}></FlightDataRow>)}
             <tr>
               <th colSpan={4}>Total</th>
-              <td colSpan={4}>{totalHours}</td>
+              <td>{totalHours}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
             </tr>
           </tbody>
         </Table>
