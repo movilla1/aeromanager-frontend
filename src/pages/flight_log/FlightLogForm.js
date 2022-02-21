@@ -56,6 +56,17 @@ function FlightLogForm(props) {
       })
   }
 
+  const flightDuration = () => {
+    const diff = (EndTime - StartTime);
+    const hours = Math.floor(diff / 1000 / 60 / 60);
+    const minutes = Math.ceil((diff / 1000 / 60) - hours*60);
+    if (hours > 0 || minutes > 0) {
+      return `${hours} hora y ${minutes} minutos`;
+    } else {
+      return `sin datos`;
+    }
+  }
+
   const handleBack = (evt) => {
     history.goBack();
   }
@@ -68,8 +79,8 @@ function FlightLogForm(props) {
     getMadhelAirport(capsedAirport, destinationID);
   }
 
-  const onlyCertainFlightTypes = () =>
-    (flightType !== "INST" || flightType !== "ADAP");
+  const onlyCertainFlightTypes = (flightType) =>
+    (flightType !== "INST" && flightType !== "ADAP" && flightType !== "READ");
 
   const handleChangeData = (evt, field) => {
     setFlightLogData({
@@ -147,7 +158,7 @@ function FlightLogForm(props) {
               value={instructor}
               onChange={(e) => handleChangeData(e, "instructor")}
               apiEndpoint="/users/instructors"
-              disabled={onlyCertainFlightTypes()}
+              disabled={onlyCertainFlightTypes(flightType)}
             ></MappedSelect>
           </Col>
         </Row>
@@ -177,6 +188,12 @@ function FlightLogForm(props) {
               onChange={setEndTime}
               id="endTime"
             />
+          </Col>
+        </Row>
+        <Row>
+          <Col md="2"><Form.Label>Flight Duration</Form.Label></Col>
+          <Col md="4">
+            {flightDuration()}
           </Col>
         </Row>
         <Row>
@@ -218,12 +235,6 @@ function FlightLogForm(props) {
             }}
           ></TextField>
           <span class="validation" id="destinationAirport"></span>
-        </Row>
-        <Row>
-          <Col md="2"><Form.Label>Flight Duration</Form.Label></Col>
-          <Col md="4">
-            {Math.round((EndTime - StartTime) / 1000 / 60 / 60)}
-          </Col>
         </Row>
         <Row style={{ textAlign: "center", marginTop: "10pt" }}>
           <Col>
