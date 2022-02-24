@@ -28,12 +28,12 @@ function FlightLogForm(props) {
     instructor,
     destinationAirport,
     originAirport,
-    passengerCount
+    passengerCount,
+    notes
   } = FlightLogData;
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log(FlightLogData);
     const formData = {
       airplane_id: airplaneID,
       flight_start: StartTime,
@@ -44,7 +44,12 @@ function FlightLogForm(props) {
       instructor_id: instructor,
       destination_airport: destinationAirport,
       origin_airport: originAirport,
-      passenger_count: passengerCount
+      passenger_count: passengerCount,
+      notes: notes
+    }
+    if (destinationAirport.length < 2 || originAirport.length < 2) {
+      document.getElementById("originAirport").innerHTML = "<h3>Origen y destino son OBLIGATORIOS</h3>";
+      return;
     }
     ApiCreateOrUpdateCall("/flight_logs", formData, props.token)
       .then((response) => {
@@ -215,7 +220,7 @@ function FlightLogForm(props) {
         <Row>
           <TextField
             label="Aero. Origen"
-            placeholder="CED"
+            placeholder="Ejemplo: CED"
             value={originAirport}
             onChange={(e) => {
               handleChangeData(e, "originAirport");
@@ -227,7 +232,7 @@ function FlightLogForm(props) {
         <Row>
           <TextField
             label="Aero. Destino"
-            placeholder="EZE"
+            placeholder="Ejemplo: EZE"
             value={destinationAirport}
             onChange={(e) => {
               handleChangeData(e, "destinationAirport")
@@ -235,6 +240,12 @@ function FlightLogForm(props) {
             }}
           ></TextField>
           <span class="validation" id="destinationAirport"></span>
+        </Row>
+        <Row>
+          <Col md="2">Notas</Col>
+          <Col md="8">
+            <textarea id="notes" name="notes" onChange={(e) => handleChangeData(e, "notes")}></textarea>
+          </Col>
         </Row>
         <Row style={{ textAlign: "center", marginTop: "10pt" }}>
           <Col>

@@ -11,6 +11,7 @@ export class FlightLog {
       this.destinationAirport = flightLogObj.destinationAirport;
       this.instructor = flightLogObj.instructor;
       this.passengerCount = flightLogObj.passengerCount;
+      this.notes = flightLogObj.notes;
     } else {
       this.airplaneID = "";
       this.flightStart = Date.now();
@@ -22,6 +23,7 @@ export class FlightLog {
       this.destinationAirport = "";
       this.instructor = "";
       this.passengerCount = 1;
+      this.notes = "";
     }
   };
 }
