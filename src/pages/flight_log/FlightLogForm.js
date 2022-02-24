@@ -243,11 +243,12 @@ function FlightLogForm(props) {
         </Row>
         <Row>
           <Col md="2">Notas</Col>
-          <Col md="8">
+          <Col md="10">
             <textarea id="notes"
               name="notes"
               onChange={(e) => handleChangeData(e, "notes")}
-              rows="5" cols="40"></textarea>
+              style={ {width: "100%"} }
+              rows="5"></textarea>
           </Col>
         </Row>
         <Row style={{ textAlign: "center", marginTop: "10pt" }}>
