@@ -3,13 +3,12 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faEye } from '@fortawesome/free-solid-svg-icons'
 import PropTypes from 'prop-types'
-
+import MadhelFieldWithTooltip from '../../shared/madhel_field_with_tooltip'
 function FlightDataRow(props) {
   const row = props.row.attributes;
   if (typeof(row) == 'undefined') {
      return false;
   }
-  console.log(props.row.attributes);
   return (
     <tr>
       <td>{props.row.id}</td>
@@ -18,8 +17,12 @@ function FlightDataRow(props) {
       <td>{row.flightEnd}</td>
       <td>{row.normalizedDuration}</td>
       <td>{row.flightType}</td>
-      <td>{row.originAirport}</td>
-      <td>{row.destinationAirport}</td>
+      <td>
+        <MadhelFieldWithTooltip shortName={row.originAirport} id="originAirport"/>
+      </td>
+      <td>
+        <MadhelFieldWithTooltip shortName={row.destinationAirport} id="destinationAirport"/>
+      </td>
       <td><Link to={`/flightlog/${props.row.id}`} title="Ver detalle"><FontAwesomeIcon icon={faEye} /></Link></td>
     </tr>
   )

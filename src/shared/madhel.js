@@ -3,14 +3,18 @@ import axios from "axios";
 const MADHEL_API = 'https://datos.anac.gob.ar/madhel/api/v2/airports/';
 // interface with madhel data
 
-export const getMadhelAirport = (identifier, destinationID) => (
-  axios.get(MADHEL_API + identifier + "/").then(
-    response => {
-      const parsedData = response.data;
-      document.getElementById(destinationID).innerHTML = parsedData?.data?.human_readable_identifier;
-    }
-  )
-)
+export const getMadhelAirport = (identifier, destinationID) => {
+  if (identifier?.length < 2) {
+    return(false);
+  } else {
+    return(axios.get(MADHEL_API + identifier + "/").then(
+      response => {
+        const parsedData = response.data;
+        document.getElementById(destinationID).innerHTML = parsedData?.data?.human_readable_identifier;
+      }
+    ))
+  }
+};
 
 //example response:
 // {
