@@ -26,6 +26,7 @@ function AppHeading(props) {
               {userName && <Fragment>
                 <Nav.Link href="#/flightlog/new">Nuevo Vuelo</Nav.Link>
                 <Nav.Link href="#/flightlogs">Mis Vuelos</Nav.Link>
+                <Nav.Link href="#/madhel">Madhel</Nav.Link>
               </Fragment>}
               <NavLoginSlot />
             </Nav>

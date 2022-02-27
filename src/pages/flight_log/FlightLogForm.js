@@ -227,7 +227,7 @@ function FlightLogForm(props) {
               madhelFetch(e, "originAirport");
             }}
           ></TextField>
-          <span class="validation" id="originAirport"></span>
+          <span className="validation" id="originAirport"></span>
         </Row>
         <Row>
           <TextField
@@ -239,7 +239,7 @@ function FlightLogForm(props) {
               madhelFetch(e, "destinationAirport");
             }}
           ></TextField>
-          <span class="validation" id="destinationAirport"></span>
+          <span className="validation" id="destinationAirport"></span>
         </Row>
         <Row>
           <Col md="2">Notas</Col>

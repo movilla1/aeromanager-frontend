@@ -76,3 +76,22 @@ div.react-datetime-picker {
   font-size: 9pt;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
+.madhel-header {
+  text-shadow: none;
+  color:rgb(130, 130, 50)
+}
+
+.madhel-info {
+  color: black;
+  text-shadow: none;
+  text-decoration: none;
+}
+
+.madhel-info-details {
+  margin-top: 10pt;
+}
+
+.madhel-info-details .row {
+  border: 1px solid gray;
+}

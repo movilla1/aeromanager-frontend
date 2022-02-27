@@ -3,14 +3,26 @@ import axios from "axios";
 const MADHEL_API = 'https://datos.anac.gob.ar/madhel/api/v2/airports/';
 // interface with madhel data
 
-export const getMadhelAirport = (identifier, destinationID) => {
-  if (identifier?.length < 2) {
+
+/**
+ * Gets MADHEL information from their API interface
+ * @param {string} identifier holds the airfield identifier in argentinean notation
+ * @param {string} destinationID Holds the ID for the dom element to update
+ * @param {function} callBack A function that will receive the data from madhel to use on caller
+ * @returns
+ */
+export const getMadhelAirport = (identifier, destinationID, callBack = false) => {
+  if (identifier?.length !== 3) {
     return(false);
   } else {
     return(axios.get(MADHEL_API + identifier + "/").then(
       response => {
         const parsedData = response.data;
-        document.getElementById(destinationID).innerHTML = parsedData?.data?.human_readable_identifier;
+        if (callBack === false) {
+          document.getElementById(destinationID).innerHTML = parsedData?.data?.human_readable_identifier;
+        } else {
+          callBack(parsedData);
+        }
       }
     ))
   }

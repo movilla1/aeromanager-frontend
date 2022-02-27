@@ -11,6 +11,7 @@ import useToken from './shared/useToken';
 import FlightLogList from './pages/flight_log/FlightLogList';
 import FlightLogDetail from './pages/flight_log/FlightLogDetail';
 import FlightLogForm from './pages/flight_log/FlightLogForm';
+import MadhelInfo from './pages/information/MadhelInfo';
 
 function App(props) {
   const { token, setToken } = useToken();
@@ -40,6 +41,9 @@ function App(props) {
           </Route>
           <Route path="/logout">
             <Logout visible={true} />
+          </Route>
+          <Route path="/madhel">
+            <MadhelInfo id={3} />
           </Route>
           <Route path="/">
             <Dashboard title="Dashboard" {...props} />
