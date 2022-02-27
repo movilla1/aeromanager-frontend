@@ -42,6 +42,14 @@ function MadhelInfo(props) {
                   <Col>{MadhelInfo.data.atz}</Col>
                 </Row>
                 <Row>
+                  <Col md="2">ATS</Col>
+                  <Col>
+                    <ul>
+                      {MadhelInfo.data.ats.map((ats)=>(<li>{ats}</li>))}
+                    </ul>
+                  </Col>
+                </Row>
+                <Row>
                   <Col md="2">Pistas</Col>
                   <Col>
                     <ul>
