@@ -1,1 +1,1 @@
-export const BASE_URI = 'http://69.55.55.40:8080/api/v1';
+export const BASE_URI = 'http://aeroapi.elcansoftware.com/api/v1';
